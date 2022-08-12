@@ -14,25 +14,18 @@ class MainViewModel : ViewModel(){
     private val editShopItemUseCase = EditShopItemUseCase(repository)
 
     // создаем LiveData для хранения данных.
-    val shopList = MutableLiveData<List<ShopItem>>()
+    val shopList = getShopListUseCase.getShopList()
 
-    //получаем значение и вставляем в LiveData
-    fun getShopList() {
-        val list = getShopListUseCase.getShopList()
-        shopList.value = list
-    }
 
     //удаление элемента
     fun deleteShopList(shopItem: ShopItem) {
         deleteShopItemUseCase.deleteShopItem(shopItem)
-        getShopList()
     }
 
     //меняет состояние enabled. Нужно создать копию объекта ShopItem с противоположным состоянием
     fun  changeEnableState(shopItem: ShopItem) {
         val newItem = shopItem.copy(enabled = !shopItem.enabled)
         editShopItemUseCase.editShopItem(newItem)
-        getShopList()
     }
 
 }
