@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ak87.simpleshopinglist.domain.ShopItem
 import com.ak87.simpleshopinglist.domain.ShopListRepository
 import java.lang.RuntimeException
+import kotlin.random.Random
 
 object ShopListRepositoryImpl : ShopListRepository{
 
@@ -17,7 +18,7 @@ object ShopListRepositoryImpl : ShopListRepository{
     //init блок это код который вополнится при создании объекта - заполнится значениями список
     init {
         for(i in 0 until 1000) {
-            val item = ShopItem("Name $i", i, true)
+            val item = ShopItem("Name $i", i, Random.nextBoolean())
             addShopItem(item)
         }
     }
